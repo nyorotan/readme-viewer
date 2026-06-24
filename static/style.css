@@ -1,0 +1,608 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #333;
+    background: #fafafa;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 40px); /* メニューバーの高さ分引く */
+}
+
+.sidebar {
+    width: 280px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.sidebar-section {
+    margin-bottom: 20px;
+}
+
+.toc-header {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+.sidebar-file-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+}
+
+.file-node {
+    list-style: none;
+}
+
+.file-node details {
+    margin: 0;
+}
+
+.file-summary {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px 10px;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    background: #f8f9fb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+}
+
+.file-summary::-webkit-details-marker {
+    display: none;
+}
+
+.file-summary:hover {
+    background: #eef5ff;
+}
+
+.file-summary.active-file {
+    background: #eaf4ff;
+    border-color: #b7d7ff;
+    font-weight: 600;
+}
+
+.file-marker {
+    display: inline-block;
+    width: 14px;
+    text-align: center;
+    font-size: 14px;
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.file-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333;
+}
+
+.file-summary.active-file .file-title {
+    color: #0055b3;
+}
+
+.toc {
+    list-style: none;
+    margin-top: 6px;
+    padding-left: 10px;
+    border-left: 1px dashed #ddd;
+}
+
+.toc ul {
+    list-style: none;
+    padding-left: 12px;
+    margin: 4px 0;
+}
+
+.toc li {
+    list-style: none;
+    margin: 4px 0;
+}
+
+.toc details {
+    margin: 0;
+}
+
+.toc summary {
+    cursor: pointer;
+    font-size: 13px;
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+}
+
+.toc summary::-webkit-details-marker {
+    display: none;
+}
+
+.toc-marker {
+    display: inline-block;
+    width: 14px;
+    color: #888;
+    font-size: 10px;
+    text-align: center;
+    user-select: none;
+}
+
+.toc-marker:hover {
+    color: #333;
+}
+
+.toc-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #0066cc;
+}
+
+.toc-title:hover {
+    text-decoration: underline;
+}
+
+.toc-summary-leaf .toc-title {
+    color: #555;
+}
+
+.toc-summary-leaf .toc-marker {
+    color: #bbb;
+    cursor: default;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #fdfdfd;
+    border-bottom: 1px solid #e1e4e8;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+#search-input {
+    padding: 6px 36px 6px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 240px;
+    outline: none;
+}
+
+.search-icon-btn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.search-icon-btn:hover {
+    color: #0066cc;
+    background: #f0f0f0;
+}
+
+#search-input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0,102,204,0.15);
+}
+
+.search-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #444;
+    cursor: pointer;
+    user-select: none;
+    margin-right: 8px;
+}
+
+.search-option input[type="checkbox"] {
+    cursor: pointer;
+    margin: 0;
+}
+
+.search-status {
+    font-size: 13px;
+    color: #666;
+    min-width: 80px;
+}
+
+.search-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.search-btn:hover:not(:disabled) {
+    background: #f0f0f0;
+    border-color: #999;
+}
+
+.search-btn:disabled {
+    color: #ccc;
+    cursor: default;
+    background: #f9f9f9;
+}
+
+#viewer-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px;
+}
+
+/* 検索ハイライト */
+.search-highlight {
+    background-color: #ffeb3b;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+
+.search-highlight-active {
+    background-color: #ff9800 !important;
+    box-shadow: 0 0 0 2px #ff9800;
+}
+
+.markdown-body {
+    max-width: 900px;
+    line-height: 1.6;
+}
+
+.markdown-body h1 {
+    font-size: 28px;
+    margin: 24px 0 16px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+    font-size: 24px;
+    margin: 20px 0 12px;
+}
+
+.markdown-body h3 {
+    font-size: 20px;
+    margin: 16px 0 10px;
+}
+
+.markdown-body h4, h5, h6 {
+    font-size: 16px;
+    margin: 12px 0 8px;
+}
+
+.markdown-body p {
+    margin: 12px 0;
+}
+
+.markdown-body code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+.markdown-body strong {
+    font-weight: bold;
+}
+
+/* テーブルスタイル */
+.markdown-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.markdown-body table th {
+    background: #f5f5f5;
+    font-weight: bold;
+}
+
+.markdown-body table tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.markdown-body table tr:hover {
+    background: #f0f0f0;
+}
+
+/* リストスタイル */
+.markdown-body ul,
+.markdown-body ol {
+    margin: 12px 0;
+    padding-left: 32px;
+}
+
+.markdown-body li {
+    margin: 6px 0;
+}
+
+/* ブロッククォート */
+.markdown-body blockquote {
+    border-left: 4px solid #ddd;
+    color: #666;
+    padding: 0 16px;
+    margin: 16px 0;
+}
+
+/* コードブロック */
+.markdown-body pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+.markdown-body pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: 13px;
+}
+
+/* リンク */
+.markdown-body a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.markdown-body a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .markdown-body table {
+        font-size: 13px;
+    }
+    
+    .markdown-body table th,
+    .markdown-body table td {
+        padding: 8px;
+    }
+}
+
+/* メニューバー全体のレイアウト調整 */
+.menubar {
+    height: 40px;
+    background: #f5f5f7;
+    border-bottom: 1px solid #d1d1d6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    user-select: none;
+}
+
+.menubar-left, .menubar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-btn {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.menu-btn:hover {
+    background: #e5e5ea;
+}
+
+/* ドロップダウン */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.15);
+    z-index: 100;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+  display: block !important;
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 24px;
+    border: 1px solid #888;
+    width: 400px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.modal-content p {
+    font-size: 14px;
+    margin: 8px 0;
+    color: #555;
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+}
+@media print {
+  /* ビューワー全体を印刷対象に */
+  #viewer-wrapper,
+  #viewer,
+  .container,
+  .content {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .menubar,
+  .sidebar,
+  .dropdown,
+  .modal {
+    display: none !important;
+  }
+  /* 検索バーを印刷から除外 */
+  .search-container {
+    display: none !important;
+  }
+  .markdown-body {
+    margin: 0;
+    padding: 1rem 0;
+    page-break-inside: avoid;
+  }
+  /* ブロック要素での途中改ページを防止、余白確保 */
+  .markdown-body h1,
+  .markdown-body h2,
+  .markdown-body h3,
+  .markdown-body h4,
+  .markdown-body h5,
+  .markdown-body h6,
+  .markdown-body p,
+  .markdown-body pre,
+  .markdown-body blockquote,
+  .markdown-body li {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-after: avoid;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* 追加: 印刷時のコードブロック改行対策 */
+@media print {
+  .markdown-body pre,
+  .markdown-body pre code {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow: visible !important;
+  }
+}

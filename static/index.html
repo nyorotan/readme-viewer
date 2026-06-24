@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README Viewer</title>
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <header class="menubar">
+        <div class="menubar-left">
+            <button id="menu-back" class="menu-btn" title="戻る">← 戻る</button>
+            <button id="menu-forward" class="menu-btn" title="進む">進む →</button>
+            <button id="menu-reload" class="menu-btn" title="更新">↻ 更新</button>
+            <button id="menu-print" class="menu-btn" title="印刷">🖨 印刷</button>
+        </div>
+        <div class="menubar-right">
+            <div class="dropdown">
+                <button id="menu-more" class="menu-btn">その他 ▼</button>
+                <div id="dropdown-content" class="dropdown-content">
+                    <a href="#" id="menu-about">このアプリについて</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="toc-header">ドキュメント</div>
+                <div id="sidebar-tree" class="sidebar-tree"></div>
+            </div>
+        </aside>
+        <main class="content">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <input type="text" id="search-input" placeholder="文章内を検索..." />
+                    <button id="search-submit-btn" class="search-icon-btn" title="検索">
+                        <svg viewBox="0 0 24 24" width="16" height="16">
+                            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </button>
+                </div>
+                <label class="search-option">
+                    <input type="checkbox" id="search-all-files" /> 次のドキュメントも続けて検索
+                </label>
+                <span id="search-status" class="search-status"></span>
+                <button id="search-prev" class="search-btn" disabled>前へ</button>
+                <button id="search-next" class="search-btn" disabled>次へ</button>
+            </div>
+            <div id="viewer-wrapper">
+                <div id="viewer" class="markdown-body"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- アプリについてダイアログ -->
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>README Viewer について</h2>
+            <p><strong>バージョン:</strong> 1.0.0</p>
+            <p><strong>作者:</strong> nyorotan</p>
+            <p>READMEファイルを表示するためのビューアです。</p>
+        </div>
+    </div>
+
+    <script src="viewer.js?v=2"></script>
+</body>
+</html>
