@@ -76,7 +76,7 @@ go build -trimpath -ldflags="-H windowsgui -s -w" -o readme-viewer.exe ./
 export CGO_ENABLED=1
 export GOOS=linux
 export GOARCH=amd64
-go build -trimpath -ldflags=“-s -w” -o readme-viewer ./
+go build -trimpath -ldflags="-s -w" -o readme-viewer ./
 
 # Run
 ./readme-viewer
