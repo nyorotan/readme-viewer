@@ -2,15 +2,15 @@
 
 # README Viewer
 
+![ ](./www.jpg)
+
 ## 概要
 
-README Viewer は、`README.md` などの Markdown ファイルを表示するためのシンプルなアプリです。編集機能はありません。  
-`go:embed` を用いて静的リソース（HTML・CSS・JS・Markdown 本体）をバイナリに埋め込む為、単一ファイルにまとまります。  
+README Viewer は、`README.md` などの Markdown ファイルを表示するためのシンプルなアプリです。編集機能はありません。
+`go:embed` を用いて静的リソース（HTML・CSS・JS・Markdown 本体）をバイナリに埋め込む為、単一ファイルにまとまります。
 OSごとに内部で利用するレンダリングエンジンが異なります。（WindowsはEdge/WebView2、macOSはWebKit、LinuxはWebKitGTK）
 
-
 自作アプリと一緒に配布することで、誰もが簡単に同じ見た目で、`README.md` を読めるようにすることが目的です。
-
 
 
 ## 主な機能
@@ -80,8 +80,8 @@ go build -trimpath -ldflags="-s -w" -o readme-viewer ./
 
 # 実行
 ./readme-viewer
-
 ```
+
 
 ## 埋め込みリソースについて
 
@@ -100,6 +100,7 @@ var staticFS embed.FS
 - Windows では WebView2 Runtime がないと起動しないことがあります。
 - Linux では WebKitGTK などの依存関係が必要な場合があります。
 - ビルドエラーが出る場合は、まず `go mod tidy` を実行してください。
+
 
 ## ライセンス
 

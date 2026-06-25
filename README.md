@@ -2,10 +2,12 @@
 
 # README Viewer
 
+![ ](./www.jpg)
+
 ## Overview
 
-README Viewer is a simple app for viewing Markdown files such as `README.md`. It does not include editing functionality.  
-It uses `go:embed` to embed static resources (HTML, CSS, JS, and the Markdown file itself) into the binary, resulting in a single file.  
+README Viewer is a simple app for viewing Markdown files such as `README.md`. It does not include editing functionality.
+It uses `go:embed` to embed static resources (HTML, CSS, JS, and the Markdown file itself) into the binary, resulting in a single file.
 The rendering engine used internally varies by operating system (Edge/WebView2 on Windows, WebKit on macOS, and WebKitGTK on Linux).
 
 
