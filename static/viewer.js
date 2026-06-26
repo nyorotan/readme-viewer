@@ -1,6 +1,83 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // 右クリックの無効化
-    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    // 右クリックメニューの制御
+    const menu = document.getElementById('custom-context-menu');
+    const btnBack = document.getElementById('ctx-back');
+    const btnForward = document.getElementById('ctx-forward');
+    const btnReload = document.getElementById('ctx-reload');
+    const btnCopy = document.getElementById('ctx-copy');
+    const btnSearch = document.getElementById('ctx-search');
+    const btnPrint = document.getElementById('ctx-print');
+
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        
+        const selectedText = window.getSelection().toString().trim();
+        if (selectedText) {
+            btnCopy.classList.remove('disabled');
+            btnSearch.classList.remove('disabled');
+        } else {
+            btnCopy.classList.add('disabled');
+            btnSearch.classList.add('disabled');
+        }
+
+        menu.style.display = 'block';
+        
+        let x = e.pageX;
+        let y = e.pageY;
+        const menuWidth = menu.offsetWidth || 180;
+        const menuHeight = menu.offsetHeight || 180;
+        
+        if (x + menuWidth > window.innerWidth + window.scrollX) {
+            x = window.innerWidth + window.scrollX - menuWidth - 5;
+        }
+        if (y + menuHeight > window.innerHeight + window.scrollY) {
+            y = window.innerHeight + window.scrollY - menuHeight - 5;
+        }
+        
+        menu.style.left = `${x}px`;
+        menu.style.top = `${y}px`;
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target)) {
+            menu.style.display = 'none';
+        }
+    });
+
+    btnBack.addEventListener('click', () => {
+        window.history.back();
+        menu.style.display = 'none';
+    });
+    btnForward.addEventListener('click', () => {
+        window.history.forward();
+        menu.style.display = 'none';
+    });
+    btnReload.addEventListener('click', () => {
+        window.location.reload();
+        menu.style.display = 'none';
+    });
+    btnCopy.addEventListener('click', () => {
+        if (btnCopy.classList.contains('disabled')) return;
+        const selectedText = window.getSelection().toString();
+        navigator.clipboard.writeText(selectedText);
+        menu.style.display = 'none';
+    });
+    btnSearch.addEventListener('click', () => {
+        if (btnSearch.classList.contains('disabled')) return;
+        const selectedText = window.getSelection().toString().trim();
+        if (selectedText) {
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.value = selectedText;
+                performSearch(selectedText);
+            }
+        }
+        menu.style.display = 'none';
+    });
+    btnPrint.addEventListener('click', () => {
+        window.print();
+        menu.style.display = 'none';
+    });
 
     const params = new URLSearchParams(window.location.search);
     const file = params.get('file') || 'README.md';

@@ -1,4 +1,4 @@
-module markdown-viewer
+module readme-viewer
 
 go 1.26.4
 
