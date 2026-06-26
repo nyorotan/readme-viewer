@@ -606,3 +606,38 @@ body {
     overflow: visible !important;
   }
 }
+
+/* カスタムコンテキストメニュー */
+.context-menu {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 4px 0;
+    z-index: 10000;
+    min-width: 180px;
+    font-family: inherit;
+    font-size: 13px;
+    user-select: none;
+}
+.context-menu-item {
+    padding: 6px 16px;
+    cursor: pointer;
+    color: #333;
+}
+.context-menu-item:hover {
+    background-color: #eaf4ff;
+    color: #0066cc;
+}
+.context-menu-item.disabled {
+    color: #aaa;
+    cursor: not-allowed;
+    background-color: transparent !important;
+}
+.context-menu hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 4px 0;
+}
+

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-06-27
+
+### Fixed
+- Bug Fixes
+### Added
+- Add a Custom Context Menu
+
 ## [1.0.0] - 2026-06-24
 
 ### Added

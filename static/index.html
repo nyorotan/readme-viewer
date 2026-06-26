@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>README Viewer</title>
     <link rel="stylesheet" href="style.css?v=2">
 </head>
+
 <body>
     <header class="menubar">
         <div class="menubar-left">
@@ -36,7 +38,8 @@
                     <input type="text" id="search-input" placeholder="文章内を検索..." />
                     <button id="search-submit-btn" class="search-icon-btn" title="検索">
                         <svg viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            <path fill="currentColor"
+                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
                         </svg>
                     </button>
                 </div>
@@ -56,14 +59,27 @@
     <!-- アプリについてダイアログ -->
     <div id="about-modal" class="modal">
         <div class="modal-content">
+            
             <span class="close-btn">&times;</span>
             <h2>README Viewer について</h2>
-            <p><strong>バージョン:</strong> 1.0.0</p>
+            <p><strong>バージョン:</strong> 1.0.1</p>
             <p><strong>作者:</strong> nyorotan</p>
             <p>READMEファイルを表示するためのビューアです。</p>
         </div>
     </div>
 
+    <!-- カスタムコンテキストメニュー -->
+    <div id="custom-context-menu" class="context-menu" style="display: none;">
+        <div class="context-menu-item" id="ctx-back">戻る</div>
+        <div class="context-menu-item" id="ctx-forward">進む</div>
+        <div class="context-menu-item" id="ctx-reload">更新</div>
+        <hr>
+        <div class="context-menu-item" id="ctx-copy">コピー</div>
+        <div class="context-menu-item" id="ctx-search">文章内を検索</div>
+        <div class="context-menu-item" id="ctx-print">印刷</div>
+    </div>
+
     <script src="viewer.js?v=2"></script>
 </body>
+
 </html>
