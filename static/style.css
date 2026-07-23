@@ -478,11 +478,12 @@ body {
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-top: 4px;
+    padding: 4px 0;
 }
 
 .dropdown-content a {
     color: #333;
-    padding: 10px 16px;
+    padding: 8px 16px;
     text-decoration: none;
     display: block;
     font-size: 13px;
@@ -493,8 +494,8 @@ body {
 }
 
 .dropdown:hover .dropdown-content,
-.dropdown-content:hover {
-  display: block !important;
+.dropdown:focus-within .dropdown-content {
+    display: block;
 }
 
 /* モーダル */
@@ -638,6 +639,4 @@ body {
 .context-menu hr {
     border: none;
     border-top: 1px solid #e0e0e0;
-    margin: 4px 0;
 }
-
