@@ -57,7 +57,9 @@ func main() {
 		}
 	}
 
-	addr := ":8080"
+	host := "127.0.0.1"
+	port := "8080"
+	addr := host + ":" + port
 	subFS, err := fs.Sub(staticFS, "static")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "埋め込みリソースのロードに失敗しました: %v\n", err)
@@ -76,19 +78,19 @@ func main() {
 	}
 
 	go func() {
-		fmt.Printf("README Viewer listening on http://127.0.0.1%s\n", addr)
+		fmt.Printf("README Viewer listening on http://%s\n", addr)
 		if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
 		}
 	}()
 
-	if err := waitForServer("http://127.0.0.1" + addr + "/"); err != nil {
+	if err := waitForServer("http://" + addr + "/"); err != nil {
 		fmt.Fprintf(os.Stderr, "Server startup failed: %v\n", err)
 		os.Exit(1)
 	}
 
-	targetURL := fmt.Sprintf("http://127.0.0.1%s/?file=%s", addr, url.QueryEscape(defaultFile))
+	targetURL := fmt.Sprintf("http://%s/?file=%s", addr, url.QueryEscape(defaultFile))
 
 	w, err := createWebView()
 	if err != nil {
